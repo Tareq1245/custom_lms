@@ -75,7 +75,18 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
             Route::get('/{id}/delete', 'CoursePersonalNotesController@delete');
         });
     });
+// Enrollment Start
 
+    Route::group(['prefix' => 'enrollments'], function () {
+        Route::get('/history', 'EnrollmentController@history');
+        Route::get('/add-student-to-class', 'EnrollmentController@addStudentToClass');
+        Route::post('/store', 'EnrollmentController@store');
+        Route::get('/{sale_id}/block-access', 'EnrollmentController@blockAccess');
+        Route::get('/{sale_id}/enable-access', 'EnrollmentController@enableAccess');
+        Route::get('/export', 'EnrollmentController@exportExcel');
+    });
+
+    // Enrollment End
     Route::group(['prefix' => 'upcoming_courses'], function () {
         Route::group(['middleware' => 'user.not.access'], function () {
             Route::get('/', 'UpcomingCoursesController@index');

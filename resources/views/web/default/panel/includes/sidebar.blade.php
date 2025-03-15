@@ -129,6 +129,30 @@
             @endcan
         @endif
 
+{{-- Enrollments --}}
+
+                <li class="sidenav-item {{ (request()->is('panel/enrollments') or request()->is('panel/enrollments/*')) ? 'sidenav-item-active' : '' }}">
+                    <a href="#enrollmentsCollapse" class="d-flex align-items-center" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="enrollmentsCollapse">
+                        <span class="sidenav-item-icon mr-10">
+                            @include('web.default.panel.includes.sidebar_icons.students')
+                        </span>
+                        <span >{{ trans('update.enrollment') }}</span>
+                    </a>
+                    <div class="collapse {{ (request()->is('panel/enrollments') or request()->is('panel/enrollments/*')) ? 'show' : '' }}" id="enrollmentsCollapse">
+
+                    <ul class="sidenav-item-collapse">
+                            <li class="{{ (request()->is('panel/enrollments/history') or request()->is('panel/enrollments/history/*')) ? 'sidenav-item-active' : '' }}">
+                                <a class="nav-link" href="/panel/enrollments/history">{{ trans('public.history') }}</a>
+                            </li>
+                            <li class="{{ (request()->is('panel/enrollments/add-student-to-class') or request()->is('panel/enrollments/add-student-to-class/*')) ? 'sidenav-item-active' : '' }}">
+                                <a class="nav-link" href="/panel/enrollments/add-student-to-class">{{ trans('update.add_student_to_a_class') }}</a>
+                            </li>
+                    </ul>
+                </div>
+                </li>
+
+{{-- End Enrollments --}}
+
         @can('panel_webinars')
             <li class="sidenav-item {{ (request()->is('panel/webinars') or request()->is('panel/webinars/*')) ? 'sidenav-item-active' : '' }}">
                 <a class="d-flex align-items-center" data-toggle="collapse" href="#webinarCollapse" role="button" aria-expanded="false" aria-controls="webinarCollapse">

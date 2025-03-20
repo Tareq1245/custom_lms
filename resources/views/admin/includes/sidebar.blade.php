@@ -69,6 +69,9 @@
                             <li class="{{ (request()->is(getAdminPanelUrl('/webinars', false)) and request()->get('type') == 'text_lesson') ? 'active' : '' }}">
                                 <a class="nav-link @if(!empty($sidebarBeeps['textLessons']) and $sidebarBeeps['textLessons']) beep beep-sidebar @endif" href="{{ getAdminPanelUrl() }}/webinars?type=text_lesson">{{ trans('admin/main.text_courses') }}</a>
                             </li>
+                            <li class="{{ (request()->is('admin/webinars/bulk-import')) ? 'active' : '' }}">
+                                <a class="nav-link" href="/admin/webinars/bulk-import">Bulk Import</a>
+                            </li>
                         @endcan()
 
                         @can('admin_webinars_create')

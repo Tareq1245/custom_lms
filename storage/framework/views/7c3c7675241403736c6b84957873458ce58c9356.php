@@ -71,6 +71,9 @@
                             <li class="<?php echo e((request()->is(getAdminPanelUrl('/webinars', false)) and request()->get('type') == 'text_lesson') ? 'active' : ''); ?>">
                                 <a class="nav-link <?php if(!empty($sidebarBeeps['textLessons']) and $sidebarBeeps['textLessons']): ?> beep beep-sidebar <?php endif; ?>" href="<?php echo e(getAdminPanelUrl()); ?>/webinars?type=text_lesson"><?php echo e(trans('admin/main.text_courses')); ?></a>
                             </li>
+                            <li class="<?php echo e((request()->is('admin/webinars/bulk-import')) ? 'active' : ''); ?>">
+                                <a class="nav-link" href="/admin/webinars/bulk-import">Bulk Import</a>
+                            </li>
                         <?php endif; ?>
 
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_webinars_create')): ?>

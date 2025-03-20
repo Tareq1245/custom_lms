@@ -86,7 +86,8 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         Route::get('/export', 'EnrollmentController@exportExcel');
     });
 
-    // Enrollment End
+// Enrollment End
+
     Route::group(['prefix' => 'upcoming_courses'], function () {
         Route::group(['middleware' => 'user.not.access'], function () {
             Route::get('/', 'UpcomingCoursesController@index');

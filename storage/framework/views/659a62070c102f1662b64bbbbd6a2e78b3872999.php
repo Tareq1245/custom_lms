@@ -124,7 +124,7 @@
                     <div class="card">
                         <div class="card-header">
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_enrollment_export')): ?>
-                                <a href="<?php echo e(getAdminPanelUrl()); ?>/enrollments/export" class="btn btn-primary"><?php echo e(trans('admin/main.export_xls')); ?></a>
+                                <a href="/panel/enrollments/export" class="btn btn-primary"><?php echo e(trans('admin/main.export_xls')); ?></a>
                             <?php endif; ?>
                         </div>
 

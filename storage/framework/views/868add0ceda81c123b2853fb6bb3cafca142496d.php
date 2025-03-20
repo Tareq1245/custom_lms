@@ -77,6 +77,7 @@
 <script src="/assets/default/vendors/toast/jquery.toast.min.js"></script>
 <script type="text/javascript" src="/assets/default/vendors/simplebar/simplebar.min.js"></script>
 
+
 <script>
     var deleteAlertTitle = '<?php echo e(trans('public.are_you_sure')); ?>';
     var deleteAlertHint = '<?php echo e(trans('public.deleteAlertHint')); ?>';

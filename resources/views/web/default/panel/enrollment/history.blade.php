@@ -126,7 +126,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_enrollment_export')
-                                <a href="{{ getAdminPanelUrl() }}/enrollments/export" class="btn btn-primary">{{ trans('admin/main.export_xls') }}</a>
+                                <a href="/panel/enrollments/export" class="btn btn-primary">{{ trans('admin/main.export_xls') }}</a>
                             @endcan
                         </div>
 

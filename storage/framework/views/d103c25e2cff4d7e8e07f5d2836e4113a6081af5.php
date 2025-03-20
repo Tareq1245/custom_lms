@@ -1,13 +1,9 @@
-<?php $__env->startPush('styles_top'); ?>
-    <link rel="stylesheet" href="/assets/default/vendors/daterangepicker/daterangepicker.min.css">
-<?php $__env->stopPush(); ?>
-
 <?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
             <h1><?php echo e($pageTitle); ?></h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/panel"><?php echo e(trans('admin/main.dashboard')); ?></a>
+                <div class="breadcrumb-item active"><a href="<?php echo e(getAdminPanelUrl()); ?>"><?php echo e(trans('admin/main.dashboard')); ?></a>
                 </div>
                 <div class="breadcrumb-item"><?php echo e($pageTitle); ?></div>
             </div>
@@ -78,4 +74,4 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make(getTemplate() .'.panel.layouts.panel_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\rocketlms\resources\views/web/default/panel/enrollment/add_student_to_a_class.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\rocketlms\resources\views/web/default/panel/enrollment/add_student_to_a_class.blade.php ENDPATH**/ ?>

@@ -38,6 +38,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Brian2694\Toastr\Facades\Toastr;
 
 class WebinarController extends Controller
 {
@@ -874,6 +876,81 @@ class WebinarController extends Controller
 
         return response()->json($result, 200);
     }
+
+
+ // Bulk Import
+
+ public function bulk_import_index()
+ {
+     return view('admin.webinars.bulk_import');
+ }
+
+ public function bulk_import_data(Request $request)
+ {
+     try {
+         $collections = (new FastExcel)->import($request->file('products_file'));
+     } catch (\Exception $exception) {
+         Toastr::error('You have uploaded a wrong format file, please upload the right file.');
+         return back();
+     }
+
+
+     $data = [];
+     $skip = ['youtube_video_url', 'details', 'thumbnail','images'];
+     foreach ($collections as $collection) {
+
+         foreach ($collection as $key => $value) {
+             if ($key!="" && $value === "" && !in_array($key, $skip)) {
+                 Toastr::error('Please fill ' . $key . ' fields');
+                 return back();
+             }
+         }
+
+         $thumbnail = explode('/', $collection['thumbnail']);
+         $images =($collection['image_cover']);
+
+         array_push($data, [
+             'id' => $collection['id'],
+             'teacher_id' => $collection['teacher_id'],
+             'creator_id' => $collection['creator_id'],
+             'category_id' => $collection['category_id'],
+             // 'slug' => Str::slug($collection['name'], '-') . '-' . Str::random(6),
+             // 'category_ids' => json_encode([['id' => (string)$collection['category_id'], 'position' => 1], ['id' => (string)$collection['sub_category_id'], 'position' => 2], ['id' => (string)$collection['sub_sub_category_id'], 'position' => 3]]),
+             'type' => $collection['type'],
+             'slug' => $collection['slug'],
+             'duration' => $collection['duration'],
+             'image_cover' => $collection['image_cover'],
+             'thumbnail' => $collection['thumbnail'],
+             'video_demo' => $collection['video_demo'],
+             'video_demo_source' => $collection['video_demo_source'],
+             'capacity' => $collection['capacity'],
+             'price' => $collection['price'],
+             'organization_price' => $collection['organization_price'],
+             'support' => $collection['support'],
+
+             'certificate' => $collection['certificate'],
+             'downloadable' => $collection['downloadable'],
+             'partner_instructor' => $collection['partner_instructor'],
+             'subscribe' => $collection['subscribe'],
+             'forum' => $collection['forum'],
+             'access_days' => $collection['access_days'],
+             'points' => $collection['points'],
+             'status' => $collection['status'],
+             'created_at' => $collection['created_at'],
+
+         ]);
+
+
+
+
+     }
+     DB::table('webinars')->insert($data);
+
+     Toastr::success(count($data) . ' - Products imported successfully!');
+     return back();
+ }
+
+ // End Bulk Import
 
     public function exportExcel(Request $request)
     {

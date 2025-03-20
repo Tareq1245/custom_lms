@@ -297,6 +297,10 @@ Route::group(['prefix' => $prefix, 'namespace' => 'Admin', 'middleware' => ['web
 
             Route::get('/{id}/statistics', 'WebinarStatisticController@index');
 
+            // Bulk Upload
+            Route::get('/bulk-import', 'WebinarController@bulk_import_index');
+            Route::post('/bulk-imports', 'WebinarController@bulk_import_data');
+
             Route::group(['prefix' => 'features'], function () {
                 Route::get('/', 'FeatureWebinarsControllers@index');
                 Route::get('/create', 'FeatureWebinarsControllers@create');
